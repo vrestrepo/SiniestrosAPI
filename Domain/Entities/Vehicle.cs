@@ -5,7 +5,6 @@ public class Vehicle
     public Guid Id { get; private set; }
     public string Plate { get; private set; }
     public string OwnerIdentification { get; private set; }
-    public List<AccidentVehicle> AccidentVehicles { get; private set; }
 
     public Vehicle(Guid id, string plate, string ownerIdentification)
     {
@@ -15,6 +14,5 @@ public class Vehicle
         Id = id;
         Plate = plate;
         OwnerIdentification = ownerIdentification;
-        AccidentVehicles = new();
     }
 }

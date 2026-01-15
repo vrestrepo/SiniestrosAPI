@@ -23,7 +23,7 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<AccidentVehicle>()
             .HasOne(x => x.Vehicle)
-            .WithMany(x => x.AccidentVehicles)
+            .WithMany()
             .HasForeignKey(x => x.VehicleId);
     }
 }

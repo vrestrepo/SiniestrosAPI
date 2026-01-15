@@ -3,6 +3,8 @@ using Domain.Repositories;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using SiniestrosAPI.Swagger.Examples;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,11 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Cr
 builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("AccidentsDb"));
 builder.Services.AddScoped<IAccidentRepository, AccidentRepository>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.ExampleFilters();
+});
+builder.Services.AddSwaggerExamplesFromAssemblyOf<CreateAccidentCommandExample>();
 
 var app = builder.Build();
 

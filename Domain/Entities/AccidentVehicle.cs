@@ -7,6 +7,8 @@ public class AccidentVehicle
     public Guid VehicleId { get; private set; }
     public Vehicle Vehicle { get; private set; }
 
+    private AccidentVehicle() { }
+
     public AccidentVehicle(Accident accident, Vehicle vehicle)
     {
         Accident = accident ?? throw new ArgumentException();

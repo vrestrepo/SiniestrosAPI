@@ -16,29 +16,27 @@ public class CreateAccidentCommandHandler : IRequestHandler<CreateAccidentComman
     public async Task<Guid> Handle(CreateAccidentCommand request, CancellationToken cancellationToken)
     {
         if (request.Vehicles == null || request.Vehicles.Count == 0)
-            throw new ArgumentException();
-
-        var accidentId = Guid.NewGuid();
+            throw new ArgumentException("At least one vehicle is required");
 
         var accident = new Accident(
-            accidentId,
+            Guid.NewGuid(),
             request.OccurredAt,
             request.Department,
             request.City,
             request.AccidentType,
-            new List<AccidentVehicle>(),
             request.Victims,
             request.Description
         );
 
         foreach (var v in request.Vehicles)
         {
-            var vehicle = new Vehicle(Guid.NewGuid(), v.Plate, v.OwnerIdentification);
-            accident.AccidentVehicles.Add(new AccidentVehicle(accident, vehicle));
-        }
+            var vehicle = new Vehicle(
+                Guid.NewGuid(),
+                v.Plate,
+                v.OwnerIdentification);
 
-        if (accident.AccidentVehicles.Count == 0)
-            throw new ArgumentException();
+            accident.AddVehicle(vehicle);
+        }
 
         await _repository.AddAsync(accident);
         return accident.Id;
