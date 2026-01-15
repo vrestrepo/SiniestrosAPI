@@ -13,3 +13,7 @@ Tecnologías y herramientas utilizadas:
 - MediatR (CQRS)
 - xUnit, Moq, FluentAssertions
 - Swagger / OpenAPI
+  
+<img width="304" height="348" alt="diagrama siniestros" src="https://github.com/user-attachments/assets/bfd80a27-427b-455a-9abd-f74ea8dfb3cc" />
+
+
